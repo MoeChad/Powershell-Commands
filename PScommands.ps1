@@ -18,7 +18,7 @@ Get-Service | Where-Object {$_.Status -eq "Stopped"}
 Get-Service | Where-Object {$_.Status -eq "Stopped"} | Select-Object -First 5
 Get-Service | Where-Object {$_.Status -eq "Stopped"} | Select-Object -Last 5
 
-foreach ($file in (Get-Content -path C:\Users\moe0005\Desktop\test.txt)) {Test-Connection -computername $file -count 1 -quiet} 
+foreach ($file in (Get-Content -path C:\Users\$username\Desktop\test.txt)) {Test-Connection -computername $file -count 1 -quiet} 
 
 Get-Content -Path C:\users\$username\Desktop\test1.txt | Add-Content -path C:\users\$username\Desktop\test.txt 
 Get-ADComputer $machine -Properties * | Select-Object LastlogonDate 
