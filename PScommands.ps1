@@ -34,3 +34,5 @@ $app = get-wmiobject -class win32_product | where-object Name -like "*kerberos*"
 $app.uninstall()
 
 Get-WmiObject win32_pnpsigneddriver | where {$_.DeviceName -like "Nvidia Quadro P600" }
+
+(Get-Command Get-VM).Parameters['Parameter'].ParameterType.FullName
