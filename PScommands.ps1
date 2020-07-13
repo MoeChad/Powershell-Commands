@@ -36,3 +36,5 @@ $app.uninstall()
 Get-WmiObject win32_pnpsigneddriver | where {$_.DeviceName -like "Nvidia Quadro P600" }
 
 (Get-Command Get-VM).Parameters['Parameter'].ParameterType.FullName
+
+(Get-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion" -Name ReleaseId).ReleaseId
