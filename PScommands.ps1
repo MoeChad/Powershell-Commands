@@ -40,3 +40,7 @@ Get-WmiObject win32_pnpsigneddriver | where {$_.DeviceName -like "Nvidia Quadro 
 (Get-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion" -Name ReleaseId).ReleaseId
 
 (Get-ADComputer $ComputerName -Properties IPv4Address).IPv4Address
+
+Get-WmiObject win32_process -Filter 'name = "outlook.exe"' | Get-Member
+Get-WmiObject win32_process -Filter 'name = "chrome.exe"' | ForEach-Object { $_.SetPriority(32)}
+wmic process where name="mspaint.exe" CALL setpriority 32768
