@@ -44,3 +44,26 @@ Get-WmiObject win32_pnpsigneddriver | where {$_.DeviceName -like "Nvidia Quadro 
 Get-WmiObject win32_process -Filter 'name = "outlook.exe"' | Get-Member
 Get-WmiObject win32_process -Filter 'name = "chrome.exe"' | ForEach-Object { $_.SetPriority(32)}
 wmic process where name="mspaint.exe" CALL setpriority 32768
+
+$numbers = get-content C:\users\moe0005\Desktop\numbers.txt
+
+$Results = foreach ($number in $numbers) {
+    if ($number -eq 6) {
+        [PSCustomObject]@{
+            Group1      = $number
+            FD          = 'Y'
+            }
+        }
+    else {
+        [PSCustomObject]@{
+            Group1      = $number
+            FD          = 'N'
+
+            }
+        }
+    }
+
+
+$Results | Export-Csv -Path C:\Powershell\numbers.csv
+
+
