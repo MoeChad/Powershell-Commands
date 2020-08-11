@@ -67,3 +67,13 @@ $Results = foreach ($number in $numbers) {
 $Results | Export-Csv -Path C:\Powershell\numbers.csv
 
 get-childitem HKLM:\software\policies\microsoft\windows\deviceinstall -recurse | where-object { $_ -like "*DenyUnspecified*" }
+
+
+#how to run function remotely with PsExec
+
+Create PS-Drive
+Copy Item to C:\
+then PS-exec
+move to directory where ps1 file is
+dot source it in  . .\file.ps1
+then run function with parmaters
