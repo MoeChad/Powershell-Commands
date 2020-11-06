@@ -77,3 +77,5 @@ then PS-exec
 move to directory where ps1 file is
 dot source it in  . .\file.ps1
 then run function with parmaters
+
+(get-aduser moe0005 -Properties).memberof
