@@ -78,4 +78,7 @@ move to directory where ps1 file is
 dot source it in  . .\file.ps1
 then run function with parmaters
 
-(get-aduser moe0005 -Properties).memberof
+(get-aduser eID -Properties).memberof
+
+$results = get-aduser -Filter { Manager -eq "CN=username,OU=Users,OU=Common,DC=mbu,DC=ad,DC=ADname,DC=com" } 
+$results | Select-Object -ExpandProperty UserPrincipalName
