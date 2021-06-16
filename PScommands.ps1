@@ -82,3 +82,39 @@ then run function with parmaters
 
 $results = get-aduser -Filter { Manager -eq "CN=username,OU=Users,OU=Common,DC=mbu,DC=ad,DC=ADname,DC=com" } 
 $results | Select-Object -ExpandProperty UserPrincipalName
+
+
+#Loop used to pull Active Directory data for a list of users ($users)
+$results = foreach ($user in $userlist) {
+    $Company          = Get-aduser $user -Properties * | Select-Object -ExpandProperty Company
+    $Department       = Get-aduser $user -Properties * | Select-Object -ExpandProperty Department
+    $OfficeLocation   = Get-ADUser $user -Properties * | Select-Object -ExpandProperty physicalDeliveryOfficeName
+    $CoC              = Get-ADUser $user -Properties * | Select-Object -ExpandProperty PostalCode
+    $co               = Get-aduser $user -Properties * | Select-Object -ExpandProperty co
+    $FirstName        = Get-aduser $user -Properties * | Select-Object -ExpandProperty GivenName
+    $LastName         = Get-aduser $user -Properties * | Select-Object -ExpandProperty SurName
+
+    
+#custom object that's exported into CSV
+    [PSCustomObject]@{
+        eID           = $user
+        FirstName     = $FirstName
+        LastName      = $LastName
+        Company       = $Company
+        Department    = $Department
+        OfficeLoc     = $OfficeLocation
+        CoC           = $CoC
+        co            = $co
+        }
+    }
+
+
+$results = foreach ($user in $users) {
+    #Pulls all emails from ProxyAddresses attribute that have the '@dom.com' string
+    $emailaddress = Get-aduser $user -Properties * | Select-Object -ExpandProperty proxyaddresses | select-string -Pattern '@domain.com'
+    [PSCustomObject]@{
+        eID      = $user
+        #formats string and removes unwanted text
+        Email    = $emailaddress -join "`n" -replace 'smtp:' 
+        }
+    }
