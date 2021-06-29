@@ -110,7 +110,7 @@ $results = foreach ($user in $userlist) {
 
 
 $results = foreach ($user in $users) {
-    #Pulls all emails from ProxyAddresses attribute that have the '@dom.com' string
+    #Pulls all emails from ProxyAddresses attribute that have the '@domain.com' string
     $emailaddress = Get-aduser $user -Properties * | Select-Object -ExpandProperty proxyaddresses | select-string -Pattern '@domain.com'
     [PSCustomObject]@{
         eID      = $user
